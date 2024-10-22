@@ -7,13 +7,15 @@ class Solution:
         pos_speed.sort(key = lambda x: x[0])
 
         # (target - position) / speed + 1 to find how many turns to get to the target
-        stack = []
+        prev = 0
+        count = 0
         for i in range(n-1, -1, -1):
             turns = ((target - pos_speed[i][0]) / (pos_speed[i][1])) + 1
-            if stack and turns <= stack[-1]:
+            if turns <= prev:
                 continue
-            stack.append(turns)
-        return len(stack)
+            count += 1
+            prev = turns
+        return count
 
 
 
